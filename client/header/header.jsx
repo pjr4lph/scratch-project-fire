@@ -3,10 +3,25 @@ import { Navbar, Nav, NavItem, Glyphicon, FormControl, FormGroup, Button} from '
 
 import './header.css'
 
-const Header = () => {
+class Header extends Component  {
 
+	constructor(props){
+		super(props);
+		this.state = {
+		  filter: ''
+		}
+		this.handleInput = this.handleInput.bind(this);
+	}
 
-	return (
+	handleInput(event) {
+		this.setState({ 
+			filter: event.target.value 
+		})
+		// console.log(this.state.filter)
+	}
+
+	render(){
+		return (
 		<div >
 		<Navbar fixedTop>
 		<Navbar.Header>
@@ -23,7 +38,7 @@ const Header = () => {
 
 		<Navbar.Form pullLeft>
       <FormGroup>
-        <FormControl type="text" placeholder="Filter by language" />
+        <FormControl type="text" placeholder="Filter by language" onChange={this.handleInput}/>
       </FormGroup>{' '}
       <Button type="submit">Filter</Button>
     </Navbar.Form>
@@ -41,6 +56,8 @@ const Header = () => {
 		</div>
 
 		);
+	}
+	
 }
 
 
