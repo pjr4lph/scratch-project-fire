@@ -8,7 +8,7 @@ const app = express();
 const mongoURI = process.env.NODE_ENV === 'mongodb://teamfire:p%40ssword@ds245518.mlab.com:45518/teamfirescratchproject';
 mongoose.connect(mongoURI);
 
-app.use(bodyParser);
+app.use(bodyParser.json());
 
 app.get('/' repoController.getAllRepos);
 
@@ -21,4 +21,4 @@ app.get('/' repoController.getAllRepos);
 // });
 
 
-app.listen(8080, 'listening on 3000')
+app.listen(8080)
