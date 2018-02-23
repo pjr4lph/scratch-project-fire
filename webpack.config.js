@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const entry = [
-  './client/app.js'
+  './client/app.jsx'
 ];
 
 const output = {
@@ -26,4 +26,4 @@ module.exports = {
       },
     ],
   },
-};  
+};
