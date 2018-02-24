@@ -3,35 +3,42 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const OAuth2Strategy = require('passport-oauth2');
-
+const oAuthPassport = require('./auth');
+const session = require('express-session');
+const repoController = require('./repo/repoController');
 
 const app = express();
 
-const mongoURI = process.env.NODE_ENV === 'mongodb://teamfire:p%40ssword@ds245518.mlab.com:45518/teamfirescratchproject';
+const mongoURI = 'mongodb://teamfirrre:teamfire1@ds245518.mlab.com:45518/teamfirescratchproject';
 mongoose.connect(mongoURI);
 
 app.use(bodyParser.json());
 
-app.get('/' repoController.getAllRepos);
-
-passport.use(new OAuth2Strategy({
-    authorizationURL: 'https://github.com/login/oauth/authorize?client_id=002c7138176488b1957e&redirect_uri=http://localhost:8080/oauth_redirect',
-    tokenURL: ,
-    clientID: '002c7138176488b1957e',
-    clientSecret: 'be7d3fec37212b0cf007c4e71eba3964fb7fc3e9',
-    callbackURL :
-  }, function(accessToken, refreshToken, profile, cb){
-
-  });
-);
-
-app.get('/login', passport.authenticate('oauth2'));
-
-app.post('/login', (req, res) => {
-
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
 });
 
-('/oauth_redirect')
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
 
-app.listen(8080)
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/getRepos', repoController.getAllRepos);
+
+app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https://www.google.com/' }));
+
+// add logout route that removes user from users collection in db
+// app.get('/signout', );
+
+app.get('/', (req, res) => {
+  res.redirect('http://localhost:8080/');
+})
+
+app.listen(8081, () => {
+  console.log("server listening on 8081");
+});
