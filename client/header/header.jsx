@@ -3,6 +3,16 @@ import { Navbar, Nav, NavItem, Glyphicon, FormControl, FormGroup, Button} from '
 
 import './header.css'
 
+// import {
+//   Route,
+//   NavLink,
+//   HashRouter
+// } from "react-router-dom";
+
+
+// import RepoList from "../RepoList/RepoList.jsx";
+// import RepoDetails from "../RepoDetails/Details.jsx";
+
 class Header extends Component  {
 
 	constructor(props){
@@ -17,12 +27,11 @@ class Header extends Component  {
 		this.setState({ 
 			filter: event.target.value 
 		})
-		// console.log(this.state.filter)
 	}
 
 	render(){
 		return (
-		<div >
+		<div id="top_nav">
 		<Navbar fixedTop>
 		<Navbar.Header>
 		<Navbar.Brand>
@@ -52,8 +61,7 @@ class Header extends Component  {
 		</Nav>
 		</Navbar.Collapse>
 		</Navbar>
-
-		</div>
+    </div>
 
 		);
 	}
