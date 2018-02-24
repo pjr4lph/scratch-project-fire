@@ -25,30 +25,30 @@ function Repo(props) {
       <Panel className="repo" >
         <div className="repo-img-wrapper">
             <img
-              alt={repo.prop}
+              alt={repo.org}
               className="img-responsive repo-img"
-              src='https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Fish/H-P/pufferfish-inflated-closeup.jpg' 
+              src={`${repo.avatar}`}
               onClick={() => { currRepo(repo) } }
                />
         </div>
 
         <h4
           className="ellipsis"
-          title={repo.prop}
+          title={repo.name}
           >
-          <a href="#">
+          <a href={`${repo.url}`}>
             {repo.name}
           </a>
         </h4>
 
         <h5
           className="ellipsis repo-brand-name"
-          title={repo.prop}>
-          {`by ${repo.brand_name}`}
+          title={repo.name}>
+          {`by ${repo.org}`}
         </h5>
 
         <div className="pull-right h4 repo-link">
-          {`${repo.prop}`}
+          {`${repo.name}`}
         </div>
 
       </Panel>
