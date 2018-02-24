@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "update": "node update.js",
-    "start": "webpack-dev-server --hot --inline --progress --colors --watch --content-base ./",
+    "start": "webpack-dev-server --hot --inline --progress --colors --watch --content-base",
+    "server": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,17 +17,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.14.2",
     "bootstrap": "^4.0.0",
     "chai": "^3.5.0",
     "cookie-parser": "^1.4.1",
+    "cors": "^2.8.4",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
-    "express-session": "^1.13.0",
+    "express-session": "^1.15.6",
     "jsonwebtoken": "^8.1.1",
     "mocha": "^2.4.5",
     "mongoose": "4.4.1",
     "nodemon": "^1.8.1",
+    "passport": "^0.4.0",
+    "passport-oauth2": "^1.4.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
