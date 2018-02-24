@@ -1,0 +1,53 @@
+
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const oAuthPassport = require('./auth');
+const session = require('express-session');
+const repoController = require('./repo/repoController');
+
+const app = express();
+
+// const router = express.Router();
+
+const mongoURI = 'mongodb://teamfirrre:teamfire1@ds245518.mlab.com:45518/teamfirescratchproject';
+mongoose.connect(mongoURI);
+
+app.use(express.static(__dirname + './../'))
+app.use(bodyParser.json());
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header('User-Agent', 'GitSource');
+//   next();
+// });
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: true,
+//   saveUninitialized: true
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+app.get('/', repoController.getAllRepos);
+
+// app.use('/test', () => {
+//   console.log('test fired!')
+// })
+
+app.get('/auth', () => {
+  alert('auth route')
+})
+
+// app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https://www.google.com/' }),
+//   function(req, res) {
+//     console.log("request  ", req)
+//     res.redirect('/');
+//   });
+
+app.listen(8081, () => {
+  console.log("server listening on 8081");
+});
+
+module.exports = app;
