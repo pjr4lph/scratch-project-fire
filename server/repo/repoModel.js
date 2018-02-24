@@ -7,10 +7,11 @@ var repoSchema = new Schema({
   watchers: {type: Number, required: true}, // (# of watchers open)
   url: {type: String, required: true}, // (actual url of repo)
   description: {type: String, required: true},
-  languages: {type: Array, required: true},
-  issues: {type: Array, required: true},
+  languages: {type: Array},
+  issues: {type: Array},
   org: {type: String, required: true},
-  name: {type: String, required: true}
+  name: {type: String},
+  avatar: {type: String}
 });
 
 module.exports = mongoose.model('Repo', repoSchema);

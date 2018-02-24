@@ -1,0 +1,41 @@
+{
+    "botkit": {
+        "org": "howdyai"
+    },
+    "rust": {
+        "org": "rust-lang"
+    },
+    "django": {
+        "org": "django"
+    },
+    "moby": {
+        "org": "moby"
+    },
+    "brew": {
+        "org": "Homebrew"
+    },
+    "middleman": {
+        "org": "middleman"
+    },
+    "batavia": {
+        "org": "pybee"
+    },
+    "atom": {
+        "org": "atom"
+    },
+    "hoodie": {
+        "org": "hoodiehq"
+    },
+    "zulip": {
+        "org": "zulip"
+    },
+    "hospitalrun-frontend": {
+        "org": "HospitalRun"
+    },
+    "exercism.io": {
+        "org": "exercism"
+    },
+    "node": {
+        "org": "nodejs"
+    }
+}
