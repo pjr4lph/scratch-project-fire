@@ -12,5 +12,5 @@ import Routes from './Routes.jsx';
 
 render((
     <App />
-  
+
 ), document.getElementById('app'))

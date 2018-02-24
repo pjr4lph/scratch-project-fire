@@ -17,19 +17,19 @@ import axios from 'axios';
 import RepoDetails from "./RepoDetails/Details.jsx";
 
 
-class App extends Component { 
+class App extends Component {
 	constructor(props) {
     super(props);
 
-    this.state = { 
+    this.state = {
       repos: [],
       currentRepo: null
-    };   
+    };
 
     this.getCurrentRepo = this.getCurrentRepo.bind(this)
   }
   componentDidMount() {
-    fetch("http:\//localhost:8081/getRepos")
+    fetch("http://localhost:8081/getRepos")
     .then(res => res.json())
     .then(repos => {console.log(repos); this.setState({ repos })})
     .then(res => {console.log(this.state)})
@@ -38,7 +38,7 @@ class App extends Component {
   getTest(){
     axios({
       method: 'get',
-      url: 'http:\//localhost:8081/login',
+      url: 'http://localhost:8081/login',
       // headers: {'Access-Control-Allow-Origin': 'http://localhost:8081/'}
   })
     .then(function(response){
@@ -94,7 +94,7 @@ export default App;
 //             </Grid>
 //             </div>
 //             );
-//         } 
+//         }
 
 //         return (
 //           <div>
@@ -102,7 +102,6 @@ export default App;
 //             <RepoDetails />
 //           </div>
 //         );
-          
+
 
 //    }
-

@@ -3,16 +3,6 @@ import { Navbar, Nav, NavItem, Glyphicon, FormControl, FormGroup, Button} from '
 
 import './header.css'
 
-// import {
-//   Route,
-//   NavLink,
-//   HashRouter
-// } from "react-router-dom";
-
-
-// import RepoList from "../RepoList/RepoList.jsx";
-// import RepoDetails from "../RepoDetails/Details.jsx";
-
 class Header extends Component  {
 
 	constructor(props){
@@ -24,8 +14,8 @@ class Header extends Component  {
 	}
 
 	handleInput(event) {
-		this.setState({ 
-			filter: event.target.value 
+		this.setState({
+			filter: event.target.value
 		})
 	}
 
@@ -43,8 +33,6 @@ class Header extends Component  {
 		</Navbar.Header>
 		<Navbar.Collapse>
 		<Nav pullRight>
-		
-
 		<Navbar.Form pullLeft>
       <FormGroup>
         <FormControl type="text" placeholder="Filter by language" onChange={this.handleInput}/>
@@ -55,17 +43,18 @@ class Header extends Component  {
 		<NavItem
 		eventKey={1}
 		href="#">
-		<Glyphicon glyph="icon-github" />          
+		<Glyphicon glyph="icon-github" />
 		</NavItem>
-		
+
 		</Nav>
 		</Navbar.Collapse>
 		</Navbar>
-    </div>
+
+		</div>
 
 		);
 	}
-	
+
 }
 
 
