@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import ReactDom from "react-dom";
 import { Grid } from 'react-bootstrap';
 import Routes from './Routes.jsx';
+import axios from 'axios';
 
 // import {
 //   Route,
@@ -21,14 +22,32 @@ class App extends Component {
     super(props);
 
     this.state = { 
-      repos: [{prop: 'value1', path: 'path1'},
-        {prop: 'value2', path: 'path1'}, {prop: 'value3', path: 'path1'},
-        {prop: 'value4', path: 'path1'}, {prop: 'value5', path: 'path1'},
-        {prop: 'value6', path: 'path1'}],
+      repos: [],
       currentRepo: null
     };   
 
     this.getCurrentRepo = this.getCurrentRepo.bind(this)
+  }
+  componentDidMount() {
+    fetch("http:\//localhost:8081/getRepos")
+    .then(res => res.json())
+    .then(repos => {console.log(repos); this.setState({ repos })})
+    .then(res => {console.log(this.state)})
+  }
+
+  getTest(){
+    axios({
+      method: 'get',
+      url: 'http:\//localhost:8081/login',
+      // headers: {'Access-Control-Allow-Origin': 'http://localhost:8081/'}
+  })
+    .then(function(response){
+      console.log('response')
+      console.log(response);
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
   }
 
   getCurrentRepo(curr) {
