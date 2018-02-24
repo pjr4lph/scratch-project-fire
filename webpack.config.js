@@ -31,6 +31,11 @@ module.exports = {
       ]
     },
     {
+      test: /\.less$/,
+      exclude: /node_modules/,
+      loader: 'style!css!less'
+    },
+    {
       test: /\.(scss)$/,
       use: [
         {
