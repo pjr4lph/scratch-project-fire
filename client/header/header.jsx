@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, Glyphicon, FormControl, FormGroup, Button} from 'react-bootstrap';
 
-import './header.css'
+import style from './header.scss'
 
 class Header extends Component  {
 

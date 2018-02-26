@@ -13,6 +13,7 @@ const mongoURI = 'mongodb://teamfirrre:teamfire1@ds245518.mlab.com:45518/teamfir
 mongoose.connect(mongoURI);
 
 app.use(bodyParser.json());
+// app.use(express.static())
 
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -35,9 +36,9 @@ app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https:
 // add logout route that removes user from users collection in db
 // app.get('/signout', );
 
-app.get('/', (req, res) => {
-  res.redirect('http://localhost:8080/');
-})
+// app.get('/', (req, res) => {
+//   res.redirect('http://localhost:8080/');
+// })
 
 app.listen(8081, () => {
   console.log("server listening on 8081");

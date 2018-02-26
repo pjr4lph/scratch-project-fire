@@ -1,7 +1,7 @@
 import { Col, Panel } from 'react-bootstrap';
 import React, { Component } from 'react';
 import Repo from '../Repo/Repo.jsx';
-import './RepoList.css'
+import style from './RepoList.scss'
 import RepoDetails from "../RepoDetails/Details.jsx";
 
 import {
@@ -22,12 +22,12 @@ class RepoList extends React.Component {
       <div className="repos">
         {
           this.props.repos.map((repo, idx )=> (
-      
-            <Repo 
+
+            <Repo
               key={idx}
               repo={repo}
               currRepo={this.props.currentRepo}
-            /> 
+            />
           ))
         }
       </div>

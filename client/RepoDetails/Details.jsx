@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './Details.css'
+import  style from'./Details.scss'
 
 const Details = (details) => {
   console.log(details)

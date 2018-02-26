@@ -5,7 +5,7 @@ import App from './app.jsx';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Routes from './Routes.jsx';
 
-
+import style from './main.scss'
 // render(
 //   <App />, document.getElementById('app')
 //   );
