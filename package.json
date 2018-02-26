@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack",
     "update": "node update-repos.js",
-    "start": "webpack-dev-server --hot --inline --progress --colors --watch --content-base",
-    "server": "node server/server.js",
+    "start:dev": "webpack-dev-server",
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

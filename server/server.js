@@ -13,6 +13,7 @@ const mongoURI = 'mongodb://teamfirrre:teamfire1@ds245518.mlab.com:45518/teamfir
 mongoose.connect(mongoURI);
 
 app.use(bodyParser.json());
+// app.use(express.static())
 
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");

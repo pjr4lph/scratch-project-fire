@@ -1,4 +1,5 @@
-const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require("webpack")
 const path = require('path');
 
 const entry = './client/index.jsx';
@@ -10,55 +11,32 @@ const output = {
 };
 
 module.exports = {
-  entry, output,
+  entry: path.resolve(__dirname, entry), 
+  output: output,
   devtool: "source-map",
   module: {
     loaders: [
-    {
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets:[ 'es2015', 'react' ]
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader", "sass-loader"]
+        })
       }
-    },
-    {
-      test: /\.css$/,
-      exclude: /node_modules/,
-      use: [
-      { loader: "style-loader" },
-      { loader: "css-loader" },
-      ]
-    },
-    {
-      test: /\.less$/,
-      exclude: /node_modules/,
-      loader: 'style!css!less'
-    },
-    {
-      test: /\.(scss)$/,
-      use: [
-        {
-          loader: 'style-loader', // inject CSS to page
-        },
-        {
-          loader: 'css-loader', // translates CSS into CommonJS modules
-        },
-        {
-          loader: 'postcss-loader', // Run post css actions
-          options: {
-            plugins: function () { // post css plugins, can be exported to postcss.config.js
-              return [
-              require('precss'),
-              require('autoprefixer')
-              ];
-            }
-          }
-        },
-        {
-          loader: 'sass-loader' // compiles Sass to CSS
-        }
-      ]
-    },
-  ]},
+    ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "build"),
+    hot: true,
+    port: 8080
+  },
+  plugins: [
+    new ExtractTextPlugin("styles.css"),
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };

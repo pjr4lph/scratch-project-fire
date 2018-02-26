@@ -1,6 +1,6 @@
 import { Col, Panel } from 'react-bootstrap';
 import React, { Component } from 'react';
-import './Repo.css'
+import  style from './Repo.scss'
 import {BrowserRouter, Link, Route} from 'react-router-dom';
 import RepoDetails from '../RepoDetails/Details.jsx';
 
