@@ -36,9 +36,9 @@ app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https:
 // add logout route that removes user from users collection in db
 // app.get('/signout', );
 
-// app.get('/', (req, res) => {
-//   res.redirect('http://localhost:8080/');
-// })
+app.get('/', (req, res) => {
+  res.redirect('http://localhost:8080/');
+})
 
 app.listen(8081, () => {
   console.log("server listening on 8081");
