@@ -1,6 +1,6 @@
 const fetch = require('isomorphic-fetch');
 const fs = require('fs');
-const Repo = require('../server/repo/repoModel.js')
+const Repo = require('./server/repo/repoModel.js')
 const client_id = '9d2b207f821e93af85cc' // process.env.GH_CLIENT_ID
 const mongoose = require('mongoose');
 const beginnerRepos = {
@@ -31,6 +31,8 @@ function parseData(repo) {
 		.then((data) => {
 			console.log('data', data)
 			let info = repo.split('/')
+			console.log('this is repo --', repo)
+			console.log('this is info --', info)
 			repoObj[info[1]] = {
 				org: info[0],
 				forks: data.forks,
@@ -41,27 +43,31 @@ function parseData(repo) {
 				avatar: data.avatar_url
 			}
 		})
-		.then(() => { parseLanguages(repo) })
-		.then(() => { parseIssues(repo) })
+		.then(() => { return Promise.all([parseLanguages(repo)]) })
+		.then(() => { return Promise.all([parseIssues(repo)]) })
 		.then(() => { resolve() })
 		.catch((err) => {reject(err)})
 	})
 }
 
 function parseLanguages(repo) {
-	return fetch(`https://api.github.com/repos/${repo}/languages?client_id=${client_id}`)
-	.then((res) => res.json())
-	.then((data) => {
-		console.log('lang', data)
-		let info = repo.split('/')
-		let languageArr = [];
-		languageArr.push(data)
-		repoObj[info[1]].languages = languageArr
-	})
-	.catch((err) => {console.log(err)})
+	return new Promise((resolve, reject) => {
+		return fetch(`https://api.github.com/repos/${repo}/languages?client_id=${client_id}`)
+		.then((res) => res.json())
+		.then((data) => {
+			console.log('lang', data)
+			let info = repo.split('/')
+			let languageArr = [];
+			languageArr.push(data)
+			repoObj[info[1]].languages = languageArr
+		})
+		.then(() => { resolve(); })
+		.catch((err) => {console.log(err)})
+});
 }
 
 function parseIssues(repo) {
+	return new Promise((resolve, reject) => {
 	return fetch(`https://api.github.com/repos/${repo}/issues?client_id=${client_id}`)
 	.then((res) => res.json())
 	.then((data) => {
@@ -82,7 +88,9 @@ function parseIssues(repo) {
 		repoObj[info[1]].issues = issueArr
 		return repoObj
 	})
+	.then(() => { resolve(); })
 	.catch((err) => {console.log(err)})
+});
 }
 
 function repoStore(repo) {

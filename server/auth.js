@@ -3,18 +3,19 @@ const OAuth2Strategy = require('passport-oauth2');
 const User = require('./user/userModel');
 const init = require('./init');
 const ids = require('./_config')
+const fs = require('fs');
 
 passport.use(new OAuth2Strategy({
     authorizationURL: 'https://github.com/login/oauth/authorize',
     tokenURL: 'https://github.com/login/oauth/access_token',
     clientID: ids.clientID,
     clientSecret: ids.clientSecret,
-    callbackURL: 'https://localhost:8080/',
+    callbackURL: 'http://localhost:8080/',
+    passReqToCallback: true
   },
-  function(accessToken, refreshToken, profile, cb) {
-    console.log(User)
+  function(req, accessToken, refreshToken, profile, cb) {
     User.create({ someID: profile.id }, function (err, user) {
-      console.log('findOrCreate')
+      if (err) console.log('User create error:  ', err);
       return cb(err, user);
     })
   })
