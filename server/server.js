@@ -6,7 +6,7 @@ const passport = require('passport');
 const oAuthPassport = require('./auth');
 const session = require('express-session');
 const repoController = require('./repo/repoController');
-
+const cookieParser = require('cookie-parser');
 const app = express();
 
 const mongoURI = 'mongodb://teamfirrre:teamfire1@ds245518.mlab.com:45518/teamfirescratchproject';
@@ -14,6 +14,7 @@ mongoose.connect(mongoURI);
 
 app.use(bodyParser.json());
 // app.use(express.static())
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -22,7 +23,7 @@ app.use(function(req, res, next) {
 
 app.use(session({
   secret: 'keyboard cat',
-  resave: true,
+  resave: false,
   saveUninitialized: true
 }));
 
@@ -31,10 +32,19 @@ app.use(passport.session());
 
 app.get('/getRepos', repoController.getAllRepos);
 
-app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https://www.google.com/' }));
+app.get('/auth',
+  oAuthPassport.authenticate('oauth2', { successRedirect: '/' }),
+    (req, res) => {
+      res.redirect('/');
+});
 
 // add logout route that removes user from users collection in db
-// app.get('/signout', );
+// create button that directs to '/signout'
+app.get('/signout', (req, res) => {
+  req.logout();
+  req.session = null;
+  res.redirect('/');
+});
 
 app.get('/', (req, res) => {
   res.redirect('http://localhost:8080/');
