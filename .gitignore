@@ -1,4 +1,7 @@
 npm-debug.log*
 node_modules
 build/bundle.js
+build/bundle.js.map
+build/styles.css
+build/styles.css.map
 server/_config.js
