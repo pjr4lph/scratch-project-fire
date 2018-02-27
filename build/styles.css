@@ -1,33 +1,44 @@
-#top_nav {
-  margin-bottom: 100px;
-  background-color: blue; }
+.icon {
+  padding-right: 1%; }
+
+.navbar-collapse {
+  float: right; }
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 250px; }
+
 .repo-link {
   color: orange; }
-li {
-  color: salmon; }
+
+.full {
+  width: 100%; }
+
+.repo-info {
+  padding: 2%; }
+
 .repos {
-  /*  margin-top: 60px;*/ }
-.ellipsis {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden; }
+  max-width: 700px;
+  margin: 0 auto;
+  margin-bottom: 7vh;
+  background-color: white; }
 
 /****** Repo ******/
-.repo-img-wrapper {
-  margin: -15px -15px 0;
-  height: 0;
-  padding-bottom: 100%;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid; }
+body {
+  background-color: whiteSmoke; }
 
-.repo-img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
+.form-container {
+  max-width: 40%;
+  margin: 0 auto;
+  margin-top: 7vh;
+  margin-bottom: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
 
-.repo-link {
-  margin-bottom: 0; }
+.btn-search {
+  margin: 2%; }
 
-/*# sourceMappingURL=styles.css.map*/
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZXMuY3NzIiwic291cmNlUm9vdCI6IiJ9*/
