@@ -1,25 +1,21 @@
+const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require("webpack")
-const path = require('path');
-
-const entry = './client/index.jsx';
-
-const output = {
-  path: path.resolve(__dirname, 'build'),
-  publicPath: '/build/',
-  filename: 'bundle.js',
-};
-
 module.exports = {
-  entry: path.resolve(__dirname, entry), 
-  output: output,
-  devtool: "source-map",
+  entry: './client/index.jsx',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
+  },
+ devtool: 'inline-source-map',
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /(\.js|\.jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use:{
+          loader:'babel-loader'
+        }
       },
       {
         test: /\.scss$/,
@@ -30,13 +26,9 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    contentBase: path.join(__dirname, "build"),
-    hot: true,
-    port: 8080
-  },
   plugins: [
     new ExtractTextPlugin("styles.css"),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
   ]
 };

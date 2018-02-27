@@ -63,34 +63,34 @@ function parseLanguages(repo) {
 		})
 		.then(() => { resolve(); })
 		.catch((err) => {console.log(err)})
-});
+	});
 }
 
 function parseIssues(repo) {
 	return new Promise((resolve, reject) => {
-	return fetch(`https://api.github.com/repos/${repo}/issues?client_id=${client_id}`)
-	.then((res) => res.json())
-	.then((data) => {
-		console.log('issue', data)
-		let info = repo.split('/')
-		let issueLabels = {};
-			if(Array.isArray(data)) {
-				data.forEach((issue) => {
-					issue.labels.reduce((acc, label) => {
-						if(acc[label.name] === undefined) acc[label.name] = 1
-						else acc[label.name] += 1
-						return acc
-					},	issueLabels)
-				})
-			}
-		let issueArr = [];
-		issueArr.push(issueLabels)
-		repoObj[info[1]].issues = issueArr
-		return repoObj
-	})
-	.then(() => { resolve(); })
-	.catch((err) => {console.log(err)})
-});
+		return fetch(`https://api.github.com/repos/${repo}/issues?client_id=${client_id}`)
+		.then((res) => res.json())
+		.then((data) => {
+			console.log('issue', data)
+			let info = repo.split('/')
+			let issueLabels = {};
+				if(Array.isArray(data)) {
+					data.forEach((issue) => {
+						issue.labels.reduce((acc, label) => {
+							if(acc[label.name] === undefined) acc[label.name] = 1
+							else acc[label.name] += 1
+							return acc
+						},	issueLabels)
+					})
+				}
+			let issueArr = [];
+			issueArr.push(issueLabels)
+			repoObj[info[1]].issues = issueArr
+			return repoObj
+		})
+		.then(() => { resolve(); })
+		.catch((err) => {console.log(err)})
+	});
 }
 
 function repoStore(repo) {
@@ -115,16 +115,8 @@ function repoStore(repo) {
 				resolve('success')
 			}
 		})
-		// if(err) reject(err)
-		// else resolve()
 	})
 }
-
-// Object.keys(beginnerRepos).forEach((repo) => {
-// 	repoStore(repo)
-// })
-
-// const testRepo = parseData(beginnerRepos['moby']);
 
 let promises = [];
 
@@ -141,25 +133,3 @@ Promise.all(promises).then(() => {
 		repoStore(repo)
 	})
 }).catch((error) => { console.log(error) })
-
-
-
-// for(let i = 0; i < 10; i++){
-// parseData('pybee/batavia').then(() => {
-// 	console.log(repoObj)
-// 	repoStore('batavia')
-// })
-// }
-// setTimeout(() => { Repo.create({
-// 	name: 'batavia',
-// 	org: repoObj['batavia'].org,
-// 	forks: repoObj['batavia'].forks,
-// 	open_issues: repoObj['batavia'].open_issues,
-// 	watchers: repoObj['batavia'].watchers,
-// 	url: repoObj['batavia'].url,
-// 	description: repoObj['batavia'].description,
-// 	languages: repoObj['batavia'].languages,
-// 	issues: repoObj['batavia'].issues
-// }, (err, repo) => { if (err) console.log(err)
-// 	else console.log(repo)
-// })}, 3000)

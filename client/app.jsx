@@ -1,21 +1,12 @@
-import Header from './header/header.jsx';
-import RepoList from './RepoList/RepoList.jsx'
+import Header from './components/header.jsx';
+import RepoList from './components/RepoList.jsx'
 import React, { Component } from 'react';
 import ReactDom from "react-dom";
-import { Grid } from 'react-bootstrap';
-import Routes from './Routes.jsx';
+// import { Grid } from 'react-bootstrap';
 import axios from 'axios';
 
-// import {
-//   Route,
-//   NavLink,
-//   HashRouter
-// } from "react-router-dom";
 
-
-// import RepoList from "../RepoList/RepoList.jsx";
-import RepoDetails from "./RepoDetails/Details.jsx";
-
+const links = ['Suggested', 'Popular', 'Difficulty'];
 
 class App extends Component {
 	constructor(props) {
@@ -23,87 +14,51 @@ class App extends Component {
 
     this.state = {
       repos: [],
-      currentRepo: null
+      filter: '',
+			current: links[0],
+			user: {}
     };
-
-    this.getCurrentRepo = this.getCurrentRepo.bind(this)
   }
+
   componentDidMount() {
 		const allCookies = document.cookie;
 		console.log(allCookies)
     fetch("http://localhost:8081/getRepos")
-    .then(res => res.json())
-    .then(repos => {console.log(repos); this.setState({ repos })})
-    .then(res => {console.log(this.state)})
+    .then(res => {
+			return res.json();
+		})
+    .then(repos => {
+			this.setState({ repos })
+		})
   }
 
-  getTest(){
-    axios({
-      method: 'get',
-      url: 'http://localhost:8081/login',
-      // headers: {'Access-Control-Allow-Origin': 'http://localhost:8081/'}
-  })
-    .then(function(response){
-      console.log('response')
-      console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-    });
-  }
+	updateCurrent = (name) => {
+		this.setState((prevState) => {
+			return {
+				current: name
+			}
+		})
+	}
 
-  getCurrentRepo(curr) {
-    console.log(curr)
-    this.setState({currentRepo: curr})
-  }
 
   render() {
+		console.log(this.state.repos)
     return (
       <div>
-        {
-          this.state.currentRepo ?
-            <div>
-              <Header />
-              <RepoDetails details={this.state.currentRepo} />
-            </div>
-            :
-            <div>
-              <Header />
-              <Grid id="content">
-                <RepoList currentRepo={this.getCurrentRepo} repos={this.state.repos} />
-              </Grid>
-            </div>
-        }
-        </div>
-      );
+				<Header
+					links={links}
+					current={this.state.current}
+					updateCurrent={this.updateCurrent}
+				/>
+				<div className="form-container">
+					<input className="form-control" type="text" placeholder="Search Repos"></input>
+					<button className="btn btn-primary btn-search" type="submit">Search <i className="fa fa-search"></i></button>
+				</div>
+				<RepoList repos={this.state.repos} />
+			</div>
+		);
   }
 }
 
 
-
-
 export default App;
-
-
-
-// if (this.state.page == 'home'){
-//           return (
-//             <div>
-
-//             <Header />
-//             <Grid id="content">
-//               <RepoList repos={this.state.repos} />
-//             </Grid>
-//             </div>
-//             );
-//         }
-
-//         return (
-//           <div>
-//            <Header />
-//             <RepoDetails />
-//           </div>
-//         );
-
-
-//    }

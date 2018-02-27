@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.use(session({
   secret: 'keyboard cat',
-  resave: true,
+  resave: false,
   saveUninitialized: true
 }));
 
