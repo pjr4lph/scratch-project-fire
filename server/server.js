@@ -15,23 +15,10 @@ app.use(function(req, res, next) {
 });
 
 app.use('/auth', auth);
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-}));
 
 // app.get('/user', userController.getUserData);
 
 app.get('/getRepos', repoController.getAllRepos);
-
-// add logout route that removes user from users collection in db
-// create button that directs to '/signout'
-app.get('/signout', (req, res) => {
-  req.logout();
-  req.session = null;
-  res.redirect('/');
-});
 
 app.get('/', (req, res) => {
   res.redirect('http://localhost:8080/');
