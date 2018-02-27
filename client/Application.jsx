@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const links = ['Suggested', 'Popular', 'Difficulty'];
 
-class App extends Component {
+class Application extends Component {
 	constructor(props) {
     super(props);
 
@@ -61,4 +61,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default Application;

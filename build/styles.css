@@ -1,0 +1,44 @@
+.icon {
+  padding-right: 1%; }
+
+.navbar-collapse {
+  float: right; }
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 250px; }
+
+.repo-link {
+  color: orange; }
+
+.full {
+  width: 100%; }
+
+.repo-info {
+  padding: 2%; }
+
+.repos {
+  max-width: 700px;
+  margin: 0 auto;
+  margin-bottom: 7vh;
+  background-color: white; }
+
+/****** Repo ******/
+body {
+  background-color: whiteSmoke; }
+
+.form-container {
+  max-width: 40%;
+  margin: 0 auto;
+  margin-top: 7vh;
+  margin-bottom: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.btn-search {
+  margin: 2%; }
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZXMuY3NzIiwic291cmNlUm9vdCI6IiJ9*/
