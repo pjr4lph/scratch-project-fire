@@ -14,6 +14,11 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
+router.get('/signout', (req, res) => {
+  req.logout();
+  req.session = null;
+  res.redirect('/');
+});
 
 router.get('/', oAuthPassport.authenticate('oauth2', { successRedirect: '/' }));
 
