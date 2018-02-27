@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const repoController = require('./repo/repoController');
 const auth = require('./routes/oAuth.js');
@@ -15,8 +14,6 @@ app.use(function(req, res, next) {
 });
 
 app.use('/auth', auth);
-
-// app.get('/user', userController.getUserData);
 
 app.get('/getRepos', repoController.getAllRepos);
 
