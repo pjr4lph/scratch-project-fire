@@ -29,6 +29,8 @@ class App extends Component {
     this.getCurrentRepo = this.getCurrentRepo.bind(this)
   }
   componentDidMount() {
+		const allCookies = document.cookie;
+		console.log(allCookies)
     fetch("http://localhost:8081/getRepos")
     .then(res => res.json())
     .then(repos => {console.log(repos); this.setState({ repos })})
