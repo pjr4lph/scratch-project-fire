@@ -60,7 +60,7 @@ class Application extends Component {
 		// console.log(this.state.repos)
     return (
       <div>
-				<Modal modalFunctions={this.modalFunctions} user={this.user}/>
+				<Modal modalFunctions={this.modalFunctions} user={this.state.user}/>
 				<div>
 				<Header
 				user={this.state.user}
@@ -75,8 +75,6 @@ class Application extends Component {
 				<button className="btn btn-primary btn-search" type="submit">Search <i className="fa fa-search"></i></button>
 			</div>
 			<RepoList repos={this.state.repos} />
-			 {/* Model button */}
-			{/* <button id="myBtn">Open Modal</button> */}
 		 </div>
 		);
   }
