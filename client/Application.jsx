@@ -1,5 +1,6 @@
 import Header from './components/Header.jsx';
 import Input from './components/Input.jsx';
+import User from './components/User.jsx';
 import RepoList from './components/RepoList.jsx'
 import React, { Component } from 'react';
 import ReactDom from "react-dom";
@@ -17,6 +18,7 @@ class Application extends Component {
       repos: [],
       filter: '',
 			current: links[0],
+			search: '',
 			user:  false // when user logs in, need to update with user id or related data
 		};
   }
@@ -25,17 +27,31 @@ class Application extends Component {
 		const modal = document.getElementById('myModal');
 		modal.style.display = 'none';
     const allCookies = document.cookie;
+		console.log(window.location);
 
 		if(window.location.search){
 			fetchRepos().then((repos) => {
-				return fetchUser(repos);
+				return fetchUser(repos, window.location.search.replace('?', ''));
 			}).then((newState) => {
-				this.setState(newState);
+				this.setState((prevState) => {
+					sessionStorage.setItem('gitUser', JSON.stringify(newState.user));
+					return newState;
+				}, () => {
+					history.pushState({}, "page 2", "/");
+					this.updateCurrent('Suggested');
+				});
 			})
 		}
 		else {
 			fetchRepos().then((repos) => {
-				this.setState({ repos })
+				let user = false;
+				if(sessionStorage.getItem('gitUser')){
+					user = JSON.parse(sessionStorage.getItem('gitUser'))
+				}
+				this.setState({
+					repos: repos,
+					user: user
+				})
 			})
 		}
   }
@@ -65,9 +81,14 @@ class Application extends Component {
 
 
 	logout = () => {
-		// fetch('http://localhost8081/auth/signout').then(res => res.text()).then(user => {
+		fetch('http://localhost:8081/auth/signout').then(res => res.text()).then(user => {
+			sessionStorage.clear();
 			this.setState({user: false});
-		// })
+		})
+	}
+
+	onSearch = (e) => {
+		this.setState({search: e.target.value})
 	}
 
   render() {
@@ -83,9 +104,12 @@ class Application extends Component {
 					updateCurrent={this.updateCurrent}
 					logout={this.logout}
 				/>
-				<Input />
-				<RepoList repos={this.state.repos} />
-			 </div>
+				<div className="below">
+					<User user={this.state.user}/>
+					<Input search={this.state.search} onSearch={this.onSearch}/>
+				</div>
+				<RepoList repos={this.state.repos} search={this.state.search}/>
+			</div>
 		);
   }
 }

@@ -15,6 +15,7 @@ router.get('/signout', userController.dropFromDb,  userController.updateCookies,
   // req.logout();
   // req.session = null;
   res.end('signed out');
+  // res.redirect('http://localhost:8080');
 });
 
 // router.use(session({

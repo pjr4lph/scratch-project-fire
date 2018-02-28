@@ -2,7 +2,7 @@
 @import 'repo.scss';
 @import 'repoList.scss';
 @import 'modal.scss';
-
+@import 'user.scss';
 // .ellipsis {
 //   white-space: nowrap;
 //   text-overflow: ellipsis;
@@ -24,10 +24,11 @@ body {
   justify-content: space-between;
 }
 
+.below {
+  margin-top: 25vh;
+}
 
 .form-container {
-  margin-top: 25vh;
-
   .btn-search {
     margin-left: 2%;
   }

@@ -39,8 +39,9 @@ export function util(name, data, user, links){
 }
 
 function fetchUserRepos(user, repos){
+  console.log(user);
   return new Promise((resolve, reject) => {
-    return fetch(user._json.repos_url)
+    return fetch(user.repos_url)
     .then((res) => {
       return res.json();
     })
@@ -61,21 +62,24 @@ function fetchUserRepos(user, repos){
 
       resolve({
         repos: repos,
-        user: Object.assign(user._json, {repos: userRepos, mostUsedLang: mostUsedLang})
+        user: Object.assign(user, {repos: userRepos, mostUsedLang: mostUsedLang})
       });
     })
   })
 }
 
-export function fetchUser(repos){
+export function fetchUser(repos, userID){
   let promise = new Promise((resolve, reject) => {
-    // fetch("/")
-    // .then(res => {
-		// 	return res.json();
-		// })
-    // .then(user => {
-			resolve(tempUser);
-		// })
+    fetch("http://localhost:8081/user/" + userID)
+    .then(res => {
+			return res.json();
+		})
+    .then(user => {
+			resolve(JSON.parse(user));
+		})
+    .catch(err => {
+      resolve(tempUser);
+    })
   });
 
   return promise.then(user => {
