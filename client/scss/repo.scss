@@ -7,5 +7,33 @@
 }
 
 .repo-info {
-  padding: 2%;
+  overflow: hidden;
+  max-height: 0;
+
+  .repo-content {
+    margin: 2%;
+  }
+
+  .issue {
+    color: black;
+  }
+
+  .issue:hover {
+    text-decoration: none;
+    // color: black;
+
+    // border: 2px solid DimGray;
+  }
+
+  -webkit-transition: max-height 2s, -webkit-transform 5s; /* Safari */
+  transition: max-height 2s, transform 5s;
+}
+
+.repo .btn {
+  cursor: pointer;
+}
+
+.repo:hover .repo-info {
+  overflow: scroll;
+  max-height: 300px;
 }

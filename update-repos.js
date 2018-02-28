@@ -31,8 +31,6 @@ function parseData(repo) {
 		.then((data) => {
 			console.log('data', data)
 			let info = repo.split('/')
-			console.log('this is repo --', repo)
-			console.log('this is info --', info)
 			repoObj[info[1]] = {
 				org: info[0],
 				forks: data.forks,
@@ -73,19 +71,7 @@ function parseIssues(repo) {
 		.then((data) => {
 			console.log('issue', data)
 			let info = repo.split('/')
-			let issueLabels = {};
-				if(Array.isArray(data)) {
-					data.forEach((issue) => {
-						issue.labels.reduce((acc, label) => {
-							if(acc[label.name] === undefined) acc[label.name] = 1
-							else acc[label.name] += 1
-							return acc
-						},	issueLabels)
-					})
-				}
-			let issueArr = [];
-			issueArr.push(issueLabels)
-			repoObj[info[1]].issues = issueArr
+			repoObj[info[1]].issues = data;
 			return repoObj
 		})
 		.then(() => { resolve(); })

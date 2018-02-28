@@ -24,6 +24,8 @@ class Application extends Component {
   componentDidMount() {
 		const modal = document.getElementById('myModal');
 		 modal.style.display = 'none';
+    const allCookies = document.cookie;
+    
 		fetch("http://localhost:8081/getRepos")
     .then(res => {
 			return res.json();
