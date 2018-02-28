@@ -96,9 +96,8 @@ userController.getProfileInfo = (req, res, next) => {
   User.find({ githubID: req.params.id }, (err, doc) => {
     if (err) console.log(err);
     // console.log('doc: ', doc[0].profile)
-    res.end(doc[0].profile);
+    res.json(doc[0].profile);
   });
-  next();
 }
 
 userController.dropFromDb = (req, res, next) => {
