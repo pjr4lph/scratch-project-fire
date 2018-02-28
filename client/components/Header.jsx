@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LogButton from './LogButton.jsx';
 
 const Header = (props) => {
 	console.log('props.user: ', props.user)
@@ -18,11 +19,12 @@ const Header = (props) => {
 			      </li>
 					))}
 		    </ul>
-				{(!props.user) ? 
+				<LogButton user={props.user} />
+				{/* {(!props.user) ? 
 					<a className="btn btn-outline-primary my-2 my-sm-0" href="https://github.com/login/oauth/authorize?client_id=9d2b207f821e93af85cc&redirect_uri=http://localhost:8081/auth&scope=read%3Auser">Login</a>
 				:
 					<a className="btn btn-outline-primary my-2 my-sm-0" href="http://localhost8080/signout">Logout</a>
-				}
+				} */}
 				</div>
 		</nav>
 

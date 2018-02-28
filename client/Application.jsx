@@ -17,8 +17,8 @@ class Application extends Component {
       repos: [],
       filter: '',
 			current: links[0],
-			user: {}
-    };
+			user:  null // {}
+		};
   }
 
   componentDidMount() {
@@ -50,14 +50,15 @@ class Application extends Component {
 		modal.style.display = 'none';
 	}
 
+
   render() {
 		// console.log(this.state.repos)
     return (
       <div>
-				<Modal modalFunctions={this.modalFunctions}/>
+				<Modal modalFunctions={this.modalFunctions} user={this.user}/>
 				<div>
 				<Header
-				user={this.state.user.login}
+				user={this.state.user}
 				links={links}
 				current={this.state.current}
 				updateCurrent={this.updateCurrent}

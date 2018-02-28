@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDom from "react-dom";
+import LogButton from './LogButton.jsx';
 
 function Modal(props) {
 
@@ -9,7 +10,8 @@ function Modal(props) {
         <div className="modal-content">
           <span className="close" onClick={props.modalFunctions}>&times;</span>
           <p>You're not logged in</p>
-          <button id="modalLoggin" onClick={props.modalFunctions}>Login</button>
+          <LogButton user={props.user} />
+          {/* <button id="modalLoggin" onClick={props.modalFunctions}>Login</button> */}
         </div>
       </div>
     )
