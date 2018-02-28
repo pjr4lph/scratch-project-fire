@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const repoController = require('./repo/repoController');
 const auth = require('./routes/oAuth.js');
@@ -19,9 +18,6 @@ app.use('/auth', auth);
 // app.get('/user', userController.getUserData);
 
 app.get('/getRepos', repoController.getAllRepos);
-
-// add logout route that removes user from users collection in db
-// create button that directs to '/signout'
 
 app.get('/', (req, res) => {
   res.redirect('http://localhost:8080/');
