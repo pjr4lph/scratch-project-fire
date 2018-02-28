@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import ReactDom from "react-dom";
 // import { Grid } from 'react-bootstrap';
 import axios from 'axios';
+import Modal from './components/Modal.jsx';
 
 
 const links = ['Suggested', 'Popular', 'Difficulty'];
@@ -21,9 +22,11 @@ class Application extends Component {
   }
 
   componentDidMount() {
-		const allCookies = document.cookie;
-		console.log(allCookies)
-    fetch("http://localhost:8081/getRepos")
+		const modal = document.getElementById('myModal');
+		 modal.style.display = 'none';
+    const allCookies = document.cookie;
+    
+		fetch("http://localhost:8081/getRepos")
     .then(res => {
 			return res.json();
 		})
@@ -33,29 +36,44 @@ class Application extends Component {
   }
 
 	updateCurrent = (name) => {
-		this.setState((prevState) => {
+		this.setState((prevState) => {	
+			if (name === 'Suggested') {         // && !this.state.user.login 
+				const modal = document.getElementById('myModal');
+				modal.style.display = 'block';
+			}
 			return {
 				current: name
 			}
 		})
 	}
 
+	modalFunctions = () => {
+		const modal = document.getElementById('myModal');
+		modal.style.display = 'none';
+	}
 
   render() {
-		console.log(this.state.repos)
+		// console.log(this.state.repos)
     return (
       <div>
+				<Modal modalFunctions={this.modalFunctions}/>
+				<div>
 				<Header
-					links={links}
-					current={this.state.current}
-					updateCurrent={this.updateCurrent}
+				user={this.state.user.login}
+				links={links}
+				current={this.state.current}
+				updateCurrent={this.updateCurrent}
 				/>
-				<div className="form-container">
-					<input className="form-control" type="text" placeholder="Search Repos"></input>
-					<button className="btn btn-primary btn-search" type="submit">Search <i className="fa fa-search"></i></button>
 				</div>
-				<RepoList repos={this.state.repos} />
+			
+			<div className="form-container">
+				<input className="form-control" type="text" placeholder="Search Repos"></input>
+				<button className="btn btn-primary btn-search" type="submit">Search <i className="fa fa-search"></i></button>
 			</div>
+			<RepoList repos={this.state.repos} />
+			 {/* Model button */}
+			<button id="myBtn">Open Modal</button>
+		 </div>
 		);
   }
 }
