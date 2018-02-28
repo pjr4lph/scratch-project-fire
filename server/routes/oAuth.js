@@ -1,27 +1,32 @@
 const express = require('express');
-const passport = require('passport');
-const oAuthPassport = require('../auth');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
+
+
+const userController = require('./../user/userController')
+
 
 const router = express.Router();
 
-router.get('/signout', (req, res) => {
-  req.logout();
-  req.session = null;
-  res.redirect('/');
+router.use(cookieParser());
+
+router.get('/signout', userController.dropFromDb,  userController.updateCookies, (req, res) => {
+  // console.log(req)
+  // req.logout();
+  // req.session = null;
+  res.end('signed out');
 });
 
-router.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-}));
+// router.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true
+// }));
 
-router.use(passport.initialize());
-router.use(passport.session());
-
-router.get('/', oAuthPassport.authenticate('github'), (req, res, next) => {
-  res.redirect('http://localhost:8080/?'+req.user.githubID);
+router.get('/', userController.getToken, userController.getUsername, (req, res, next) => {
+  res.cookie('db_id', res.locals.githubID);
+  res.cookie('isLoggedIn', true);
+  res.redirect('http://localhost:8080/?'+res.locals.githubID);
 });
 
 module.exports = router;
