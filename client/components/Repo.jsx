@@ -1,6 +1,7 @@
 import { Col, Panel } from 'react-bootstrap';
 import React, { Component } from 'react';
 
+// npm install remarkable --save
 const Remarkable = require('remarkable');
 const md = new Remarkable();
 
