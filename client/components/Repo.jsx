@@ -1,6 +1,9 @@
 import { Col, Panel } from 'react-bootstrap';
 import React, { Component } from 'react';
 
+const Remarkable = require('remarkable');
+const md = new Remarkable();
+
 
 function Repo(props) {
   let {
@@ -30,7 +33,7 @@ function Repo(props) {
             <a className="issue" href={issue.html_url} key={`${issue.number}repo.org`}>
               <hr />
               <h5>{issue.title}</h5>
-              <p>{issue.body}</p>
+              <p dangerouslySetInnerHTML={{ __html: md.render(issue.body)}}></p>
               <p><b>Created At: </b>{issue.created_at}</p>
               <p><b>Updated At: </b>{issue.updated_at}</p>
               <p><b>Closed At: </b>{issue.closed_at || "Still Open"}</p>
