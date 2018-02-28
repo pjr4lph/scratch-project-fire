@@ -1,10 +1,12 @@
 import { Col, Panel } from 'react-bootstrap';
 import React, { Component } from 'react';
 
-// npm install remarkable --save
+// npm install --save remarkable
 const Remarkable = require('remarkable');
 const md = new Remarkable();
 
+// npm install --save node-emoji
+const emoji = require('node-emoji');
 
 function Repo(props) {
   let {
@@ -28,7 +30,7 @@ function Repo(props) {
 
       <div className="repo-info" id={repo.org}>
         <div className="repo-content">
-          <p>{repo.description}</p>
+          <p>{emoji.emojify(repo.description)}</p>
           <p><b>Forks: </b>{repo.forks}</p>
           {(props.repo.issues).map((issue) => (
             <a className="issue" href={issue.html_url} key={`${issue.number}repo.org`}>
