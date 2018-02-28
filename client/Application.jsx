@@ -17,7 +17,7 @@ class Application extends Component {
       repos: [],
       filter: '',
 			current: links[0],
-			user:  null // {}
+			user:  false // when user logs in, need to update with user id or related data
 		};
   }
 
@@ -37,9 +37,12 @@ class Application extends Component {
 
 	updateCurrent = (name) => {
 		this.setState((prevState) => {	
-			if (name === 'Suggested') {         // && !this.state.user.login 
+			if (name === 'Suggested' && !this.state.user) {          
 				const modal = document.getElementById('myModal');
 				modal.style.display = 'block';
+			}
+			else {  // Logic for showing suggested repos.
+				console.log('Logic for showing suggested repos')
 			}
 			return {
 				current: name
@@ -73,7 +76,7 @@ class Application extends Component {
 			</div>
 			<RepoList repos={this.state.repos} />
 			 {/* Model button */}
-			<button id="myBtn">Open Modal</button>
+			{/* <button id="myBtn">Open Modal</button> */}
 		 </div>
 		);
   }
