@@ -14,7 +14,7 @@ router.get('/signout', userController.dropFromDb,  userController.updateCookies,
   // console.log(req)
   // req.logout();
   // req.session = null;
-  res.redirect('/');
+  res.end('signed out');
 });
 
 // router.use(session({
