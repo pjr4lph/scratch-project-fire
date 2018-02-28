@@ -19,15 +19,19 @@ class RepoList extends React.Component {
     return (
 
       <div className="repos">
-        {
+        {(this.props.repos.length) ?
           this.props.repos.map((repo, idx )=> (
             <Repo
               key={idx}
               repo={repo}
               currRepo={this.props.currentRepo}
             />
-          ))
-        }
+          )):
+					<div className="wait">
+						<i className="fa fa-cog fa-spin fa-3x fa-fw"></i>
+						<span className="sr-only">Loading...</span>
+					</div>
+				}
       </div>
     );
   }
