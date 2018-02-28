@@ -9,12 +9,14 @@ function Modal(props) {
     <div id="myModal" className="modal">
       <div className="modal-content">
         <span className="close" onClick={props.modalFunctions}>&times;</span>
-        <p>Please, login to see a tailored selection of repos. </p>
-        <LogButton user={props.user} />
+        <div className="center">
+          <p>Please, login to see a tailored selection of repos. </p>
+          <LogButton user={props.user} logout={props.logout}/>
+        </div>
       </div>
     </div>
   )
-  
+
 }
 
 export default  Modal;

@@ -1,13 +1,14 @@
-import Header from './components/header.jsx';
+import Header from './components/Header.jsx';
+import Input from './components/Input.jsx';
+import User from './components/User.jsx';
 import RepoList from './components/RepoList.jsx'
 import React, { Component } from 'react';
 import ReactDom from "react-dom";
-// import { Grid } from 'react-bootstrap';
-import axios from 'axios';
+
 import Modal from './components/Modal.jsx';
+import { util, fetchUser, fetchRepos } from './utils.js'
 
-
-const links = ['Suggested', 'Popular', 'Difficulty'];
+const links = ['Suggested', 'Most Popular', 'Most Open Issues'];
 
 class Application extends Component {
 	constructor(props) {
@@ -17,35 +18,58 @@ class Application extends Component {
       repos: [],
       filter: '',
 			current: links[0],
+			search: '',
 			user:  false // when user logs in, need to update with user id or related data
 		};
   }
 
   componentDidMount() {
 		const modal = document.getElementById('myModal');
-		 modal.style.display = 'none';
+		modal.style.display = 'none';
     const allCookies = document.cookie;
-    
-		fetch("http://localhost:8081/getRepos")
-    .then(res => {
-			return res.json();
-		})
-    .then(repos => {
-			this.setState({ repos })
-		})
+		console.log(window.location);
+
+		if(window.location.search){
+			fetchRepos().then((repos) => {
+				return fetchUser(repos, window.location.search.replace('?', ''));
+			}).then((newState) => {
+				this.setState((prevState) => {
+					sessionStorage.setItem('gitUser', JSON.stringify(newState.user));
+					return newState;
+				}, () => {
+					history.pushState({}, "page 2", "/");
+					this.updateCurrent('Suggested');
+				});
+			})
+		}
+		else {
+			fetchRepos().then((repos) => {
+				let user = false;
+				if(sessionStorage.getItem('gitUser')){
+					user = JSON.parse(sessionStorage.getItem('gitUser'))
+				}
+				this.setState({
+					repos: repos,
+					user: user
+				})
+			})
+		}
   }
 
 	updateCurrent = (name) => {
-		this.setState((prevState) => {	
-			if (name === 'Suggested' && !this.state.user) {          
-				const modal = document.getElementById('myModal');
-				modal.style.display = 'block';
-			}
-			else {  // Logic for showing suggested repos.
-				console.log('Logic for showing suggested repos')
-			}
+		// if user is not logged, do not change order
+		if (name === 'Suggested' && !this.state.user) {
+			const modal = document.getElementById('myModal');
+			modal.style.display = 'block';
+			return;
+		}
+
+		this.setState((prevState) => {
+			const repos = util(name, prevState.repos, prevState.user, links);
+
 			return {
-				current: name
+				current: name,
+				repos: repos
 			}
 		})
 	}
@@ -56,26 +80,36 @@ class Application extends Component {
 	}
 
 
+	logout = () => {
+		fetch('http://localhost:8081/auth/signout').then(res => res.text()).then(user => {
+			sessionStorage.clear();
+			this.setState({user: false});
+		})
+	}
+
+	onSearch = (e) => {
+		this.setState({search: e.target.value})
+	}
+
   render() {
-		// console.log(this.state.repos)
+		console.log(this.state);
+
     return (
       <div>
-				<Modal modalFunctions={this.modalFunctions} user={this.state.user}/>
-				<div>
+				<Modal modalFunctions={this.modalFunctions} user={this.state.user} logout={this.logout}/>
 				<Header
-				user={this.state.user}
-				links={links}
-				current={this.state.current}
-				updateCurrent={this.updateCurrent}
+					user={this.state.user.login}
+					links={links}
+					current={this.state.current}
+					updateCurrent={this.updateCurrent}
+					logout={this.logout}
 				/>
+				<div className="below">
+					<User user={this.state.user}/>
+					<Input search={this.state.search} onSearch={this.onSearch}/>
 				</div>
-			
-			<div className="form-container">
-				<input className="form-control" type="text" placeholder="Search Repos"></input>
-				<button className="btn btn-primary btn-search" type="submit">Search <i className="fa fa-search"></i></button>
+				<RepoList repos={this.state.repos} search={this.state.search}/>
 			</div>
-			<RepoList repos={this.state.repos} />
-		 </div>
 		);
   }
 }

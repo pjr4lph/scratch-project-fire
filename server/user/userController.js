@@ -78,9 +78,10 @@ userController.getUsername = (req, res, next) => {
         githubID: login.id,
         accessToken: res.locals.token,
         profile: JSON.stringify(login)
-      });
-      res.locals.githubID = login.id;
-      next();
+      }, (err, doc) => {
+        res.locals.githubID = login.id;
+        next();
+      });      
     });
   });
 
