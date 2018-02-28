@@ -23,29 +23,30 @@ class Header extends Component  {
 		return (
 		<div id="top_nav">
 		<Navbar fixedTop>
-			<Navbar.Header>
-				<Navbar.Brand>
-					<a href="/">Github Open Source Projects</a>
-				</Navbar.Brand>
-				<Navbar.Toggle />
-			</Navbar.Header>
+		<Navbar.Header>
+		<Navbar.Brand>
+		<a href="/">
+		Github Open Source Projects
+		</a>
+		</Navbar.Brand>
+		<Navbar.Toggle />
+		</Navbar.Header>
 		<Navbar.Collapse>
-			<Nav pullRight>
-				<Navbar.Form pullLeft>
-		      <FormGroup>
-		        <FormControl type="text" placeholder="Filter by language" onChange={this.handleInput}/>
-		      </FormGroup>{' '}
-		      <Button type="submit">Filter</Button>
-					<Button href="https://github.com/login/oauth/authorize?client_id=9d2b207f821e93af85cc&redirect_uri=http://localhost:8081/auth&scope=read%3Auser&state=statestring">Log In</Button>
-		    </Navbar.Form>
+		<Nav pullRight>
+		<Navbar.Form pullLeft>
+      <FormGroup>
+        <FormControl type="text" placeholder="Filter by language" onChange={this.handleInput}/>
+      </FormGroup>{' '}
+      <Button type="submit">Filter</Button>
+    </Navbar.Form>
 
-			<NavItem
-				eventKey={1}
-				href="#">
-				<Glyphicon glyph="icon-github" />
-			</NavItem>
+		<NavItem
+		eventKey={1}
+		href="#">
+		<Glyphicon glyph="icon-github" />
+		</NavItem>
 
-			</Nav>
+		</Nav>
 		</Navbar.Collapse>
 		</Navbar>
 
