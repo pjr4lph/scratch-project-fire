@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const repoController = require('./repo/repoController');
 const auth = require('./routes/oAuth.js');
+const user = require('./routes/user.js')
 const app = express();
 
 const mongoURI = 'mongodb://teamfirrre:teamfire1@ds245518.mlab.com:45518/teamfirescratchproject';
@@ -14,6 +15,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/auth', auth);
+app.use('/user', user);
 
 app.get('/getRepos', repoController.getAllRepos);
 
