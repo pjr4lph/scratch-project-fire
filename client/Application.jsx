@@ -21,6 +21,8 @@ class Application extends Component {
   }
 
   componentDidMount() {
+		const allCookies = document.cookie;
+		console.log(allCookies)
     fetch("http://localhost:8081/getRepos")
     .then(res => {
 			return res.json();

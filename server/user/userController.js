@@ -1,6 +1,8 @@
+const User = require('./userModel');
 
 const userController = {};
 
-userController.getToken = (req, res, next) => {
-  
+userController.getUserData = (req, res, next) => {
+  console.log('getUserData fired')
+  console.log(req)
 }
