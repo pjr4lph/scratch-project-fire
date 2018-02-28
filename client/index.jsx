@@ -6,4 +6,4 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import style from './scss/main.scss';
 
-render(<Application />, document.getElementById('Application'));
+render(<Application />, document.getElementById('app'));

@@ -1,6 +1,7 @@
 @import 'header.scss';
 @import 'repo.scss';
 @import 'repoList.scss';
+@import 'modal.scss';
 
 // .ellipsis {
 //   white-space: nowrap;
@@ -27,6 +28,9 @@ body {
   margin: 2%;
 }
 
+.modal {
+  display: block;
+}
 // form {
 //   width: 100%;
 // }

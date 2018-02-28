@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const Header = (props) => {
+	console.log('props.user: ', props.user)
 	return (
 		<nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
 		  <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,8 +18,12 @@ const Header = (props) => {
 			      </li>
 					))}
 		    </ul>
-				<a className="btn btn-outline-primary my-2 my-sm-0" href="https://github.com/login/oauth/authorize?client_id=9d2b207f821e93af85cc&redirect_uri=http://localhost:8081/auth&scope=read%3Auser">Login</a>
-		  </div>
+				{(!props.user) ? 
+					<a className="btn btn-outline-primary my-2 my-sm-0" href="https://github.com/login/oauth/authorize?client_id=9d2b207f821e93af85cc&redirect_uri=http://localhost:8081/auth&scope=read%3Auser">Login</a>
+				:
+					<a className="btn btn-outline-primary my-2 my-sm-0" href="http://localhost8080/signout">Logout</a>
+				}
+				</div>
 		</nav>
 
 	);

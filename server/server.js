@@ -15,11 +15,11 @@ app.use(function(req, res, next) {
 });
 
 app.use('/auth', auth);
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-}));
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true
+// }));
 
 // app.get('/user', userController.getUserData);
 
