@@ -24,13 +24,26 @@ body {
   justify-content: space-between;
 }
 
-.btn-search {
-  margin: 2%;
-}
 
-.modal {
-  display: block;
+.form-container {
+  margin-top: 25vh;
+
+  .btn-search {
+    margin-left: 2%;
+  }
 }
+// .form-control {
+//   margin-top: 10%;
+// }
+
+
+// .btn-search {
+//   margin: 10%;
+// }
+
+// .modal {
+//   display: block;
+// }
 // form {
 //   width: 100%;
 // }

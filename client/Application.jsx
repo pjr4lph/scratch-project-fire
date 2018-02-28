@@ -17,8 +17,8 @@ class Application extends Component {
       repos: [],
       filter: '',
 			current: links[0],
-			user: {}
-    };
+			user:  false // when user logs in, need to update with user id or related data
+		};
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class Application extends Component {
 
 	updateCurrent = (name) => {
 		// if user is not logged, do not change order
-		if (name === 'Suggested' && !Object.keys(user).length) {
+		if (name === 'Suggested' && !this.state.user) {
 			const modal = document.getElementById('myModal');
 			modal.style.display = 'block';
 			return;
@@ -63,17 +63,25 @@ class Application extends Component {
 		modal.style.display = 'none';
 	}
 
+
+	logout = () => {
+		// fetch('http://localhost8081/auth/signout').then(res => res.text()).then(user => {
+			this.setState({user: false});
+		// })
+	}
+
   render() {
 		console.log(this.state);
 
     return (
       <div>
-				<Modal modalFunctions={this.modalFunctions}/>
+				<Modal modalFunctions={this.modalFunctions} user={this.state.user} logout={this.logout}/>
 				<Header
 					user={this.state.user.login}
 					links={links}
 					current={this.state.current}
 					updateCurrent={this.updateCurrent}
+					logout={this.logout}
 				/>
 				<Input />
 				<RepoList repos={this.state.repos} />

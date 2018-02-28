@@ -6,7 +6,21 @@ export function util(name, data, user, links){
 
   switch (name) {
     case links[0]:
+      result.sort((a, b) => {
+        const repoB = b.languages[0][user.mostUsedLang];
+        const repoA = a.languages[0][user.mostUsedLang];
 
+        if(!repoB){
+          return -1;
+        }
+        if(!repoA){
+          return 1;
+        }
+        if(repoB > repoA){
+          return 1;
+        }
+        return -1;
+      });
       break;
     case links[1]:
       result.sort((a, b) => {
