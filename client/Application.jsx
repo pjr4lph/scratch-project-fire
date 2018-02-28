@@ -17,8 +17,8 @@ class Application extends Component {
       repos: [],
       filter: '',
 			current: links[0],
-			user: {}
-    };
+			user:  false // when user logs in, need to update with user id or related data
+		};
   }
 
   componentDidMount() {
@@ -37,9 +37,12 @@ class Application extends Component {
 
 	updateCurrent = (name) => {
 		this.setState((prevState) => {	
-			if (name === 'Suggested') {         // && !this.state.user.login 
+			if (name === 'Suggested' && !this.state.user) {          
 				const modal = document.getElementById('myModal');
 				modal.style.display = 'block';
+			}
+			else {  // Logic for showing suggested repos.
+				console.log('Logic for showing suggested repos')
 			}
 			return {
 				current: name
@@ -52,14 +55,15 @@ class Application extends Component {
 		modal.style.display = 'none';
 	}
 
+
   render() {
 		// console.log(this.state.repos)
     return (
       <div>
-				<Modal modalFunctions={this.modalFunctions}/>
+				<Modal modalFunctions={this.modalFunctions} user={this.state.user}/>
 				<div>
 				<Header
-				user={this.state.user.login}
+				user={this.state.user}
 				links={links}
 				current={this.state.current}
 				updateCurrent={this.updateCurrent}
@@ -71,8 +75,6 @@ class Application extends Component {
 				<button className="btn btn-primary btn-search" type="submit">Search <i className="fa fa-search"></i></button>
 			</div>
 			<RepoList repos={this.state.repos} />
-			 {/* Model button */}
-			<button id="myBtn">Open Modal</button>
 		 </div>
 		);
   }
